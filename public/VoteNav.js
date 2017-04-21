@@ -1,7 +1,9 @@
-var react = require('react')
+var React = require('react')
 
-const VoteNav = () => {
-  return (<h1>Hello World</h1>)
+class VoteNav extends React.Component{
+  render(){
+    return (<h1>Hello World</h1>)
+  }
 }
 
 module.exports = VoteNav

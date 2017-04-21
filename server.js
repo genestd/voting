@@ -1,5 +1,6 @@
 // server.js
 // where your node app starts
+require('dotenv').config()
 var session = require('express-session')
 var passport = require('passport')
 require('./auth/passport')(passport);
@@ -11,7 +12,7 @@ mongoose.connect('mongodb://' + process.env.MONGO_USER + ":" + process.env.MONGO
 var express = require('express');
 var app = express();
 
-// we've started you off with Express, 
+// we've started you off with Express,
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
 
 // http://expressjs.com/en/starter/static-files.html
