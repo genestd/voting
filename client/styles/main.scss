@@ -1,0 +1,56 @@
+h1{
+  text-align: center;
+}
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+.clearfix {
+  *zoom: 1;
+}
+.app{
+  flex: 1 0 auto
+}
+.content{
+  flex: 1 0 auto;
+}
+.voteNav{
+  color: #ffffff;
+  background-color: #26a5cc;
+  ul{
+    display: flex;
+    justify-content: space-between;
+  }
+  li{
+    display: inline-block;
+  }
+}
+.pointer{
+  cursor: pointer;
+}
+.floatRight{
+  float: right;
+}
+.survey{
+  .inline{
+    display: inline;
+    width: 75%;
+  }
+  .choice{
+    input{
+      width: 10%;
+      float:left;
+    }
+    .txtInput{
+      width: 50%;
+    }
+
+  }
+}
+.stickyFooter{
+  margin-top: 25px;
+}
