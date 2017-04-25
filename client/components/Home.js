@@ -47,7 +47,7 @@ class Home extends React.Component{
   }
 
   checkLogin(){
-    axios.get('http://localhost:8080/sessionInfo')
+    axios.get('/sessionInfo')
     .then( res=> {
       if (res.data.user.username != ''){
         if(!this.props.poll.loggedIn){
@@ -66,7 +66,7 @@ class Home extends React.Component{
   }
 
   getPolls(){
-    axios.get('http://localhost:8080/polls')
+    axios.get('/polls')
     .then( res=>{
       this.props.actions.setPolls(res.data.polls)
       })

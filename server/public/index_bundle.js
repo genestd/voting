@@ -9401,7 +9401,7 @@ var Home = function (_React$Component) {
     value: function checkLogin() {
       var _this3 = this;
 
-      _axios2.default.get('http://localhost:8080/sessionInfo').then(function (res) {
+      _axios2.default.get('/sessionInfo').then(function (res) {
         if (res.data.user.username != '') {
           if (!_this3.props.poll.loggedIn) {
             console.log('authing', res);
@@ -9421,7 +9421,7 @@ var Home = function (_React$Component) {
     value: function getPolls() {
       var _this4 = this;
 
-      _axios2.default.get('http://localhost:8080/polls').then(function (res) {
+      _axios2.default.get('/polls').then(function (res) {
         _this4.props.actions.setPolls(res.data.polls);
       });
     }
