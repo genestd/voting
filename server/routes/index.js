@@ -1,7 +1,7 @@
 var path = process.cwd() + '/server'
 var store = require('../../client/store')
 var authUser = require('../../client/actions').authUser
-var Poll = require('../models/Poll')
+var Poll = require('../models/poll')
 
 module.exports = function(app, passport){
 

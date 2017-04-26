@@ -15,9 +15,8 @@ class VoteNav extends React.Component{
       <div className='voteNav'>
         <ul>
           <li><Link to='/'>Home</Link></li>
-          <li>View Surveys</li>
           {logged ? (<li><Link to='/add'>Add a survey</Link></li>) : ''}
-          {logged ? (<li><a href="/logout/">Sign Out</a></li> ): (<li><a href="/auth/github/">Sign In</a></li>)}
+          {logged ? (<li><a href="/logout/">Sign Out</a></li> ): (<li><Link to='/Login'>Sign In</Link></li>)}
         </ul>
       </div>
     )

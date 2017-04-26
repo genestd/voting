@@ -36,7 +36,7 @@ class Home extends React.Component{
         <h1>{"Hello " + this.props.poll.user.username}</h1>
         <div>
           <h1>My Surveys <i className='icon-arrows-ccw pointer' onClick={this.getPolls}></i></h1>
-          {this.props.poll.loggedIn ? myPolls : <h3>Log in to view your surveys</h3>}
+          {this.props.poll.loggedIn ? myPolls : <h3><Link to='/Login'>Log in to view your surveys</Link></h3>}
         </div>
         <div>
           <h1>All Surveys<i className='icon-arrows-ccw pointer' onClick={this.getPolls}></i></h1>

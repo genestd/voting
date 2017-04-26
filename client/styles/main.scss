@@ -18,9 +18,20 @@ h1{
 .content{
   flex: 1 0 auto;
 }
-.voteNav{
+.login{
+  height: 100%;
+  margin: 150px 0 150px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.voteNav, .stickyFooter{
   color: #ffffff;
   background-color: #26a5cc;
+  text-align: center;
+  a, a:visited{
+    color:white;
+  }
   ul{
     display: flex;
     justify-content: space-between;
