@@ -42,6 +42,7 @@ module.exports = function(app, passport){
    //Return the session value when the client checks
    app.get('/sessionInfo', function(req,res){
      if(req.isAuthenticated()){
+       console.log(req.session)
        res.json({user: req.session.passport.user.github,
                  polls: req.session.polls || [],
                 })
@@ -77,6 +78,7 @@ module.exports = function(app, passport){
        } else {
          poll.choices[index].votes++
        }
+       poll.voters.push(req.body.username)
        poll.save(function(err, data){
          if(err) throw err
          res.json(data)
@@ -88,7 +90,8 @@ module.exports = function(app, passport){
      var newPoll = new Poll({
        owner: req.body.owner,
        description: req.body.description,
-       choices: req.body.choices
+       choices: req.body.choices,
+       voters: []
      })
      newPoll.save(function(err, data){
        if(err) throw err

@@ -32,7 +32,7 @@ class Home extends React.Component{
       }
     })
     return(
-      <div className="content">
+      <div className="site-content">
         <h1>{"Hello " + this.props.poll.user.username}</h1>
         <div>
           <h1>My Surveys <i className='icon-arrows-ccw pointer' onClick={this.getPolls}></i></h1>

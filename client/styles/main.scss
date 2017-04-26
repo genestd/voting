@@ -1,6 +1,17 @@
 h1{
   text-align: center;
 }
+.app{
+  height: 100%;
+}
+.site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+.site-content{
+  flex: 1 0 auto;
+}
 .clearfix:before,
 .clearfix:after {
   content: " ";
@@ -12,12 +23,6 @@ h1{
 .clearfix {
   *zoom: 1;
 }
-.app{
-  flex: 1 0 auto
-}
-.content{
-  flex: 1 0 auto;
-}
 .login{
   height: 100%;
   margin: 150px 0 150px 0;
@@ -25,7 +30,13 @@ h1{
   align-items: center;
   justify-content: center;
 }
-.voteNav, .stickyFooter{
+.stickyFooter{
+  width: 100%;
+  color: #ffffff;
+  background-color: #26a5cc;
+  text-align: center;
+}
+.voteNav{
   color: #ffffff;
   background-color: #26a5cc;
   text-align: center;

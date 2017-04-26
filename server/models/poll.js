@@ -3,6 +3,7 @@ var Schema = mongoose.Schema
 
 var Poll = new Schema({
   owner: String,
+  voters: [],
   description: String,
   choices: [{
     value: String,

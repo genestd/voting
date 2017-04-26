@@ -5,8 +5,8 @@ import Footer from '../components/Footer'
 
 const App = (props) => {
   return (
-    <div className='app'>
-      <div className='content'>
+    <div className='fullHeight'>
+      <div className='fullHeight'>
         <VoteNav />
         {props.children}
       </div>

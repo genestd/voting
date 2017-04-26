@@ -1,9 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
+import {Doughnut} from 'react-chartjs-2'
 import * as Actions from '../actions'
 import axios from 'axios'
 
+const colors = ['#808080','#000000','#FF0000','#800000','#FFFF00','#808000','#00FF00','#008000','#00FFFF','#008080','#0000FF','#000080','#FF00FF','#800080']
 class Poll extends React.Component{
   constructor(props){
     super(props)
@@ -13,6 +15,17 @@ class Poll extends React.Component{
     }
     this.vote = this.vote.bind(this)
     this.handleFormChange = this.handleFormChange.bind(this)
+  }
+
+  hasVoted(survey){
+    let voted=false;
+    for( let i=0; i<survey.voters.length;i++){
+      if(this.props.poll.user.username === survey.voters[i]){
+        voted = true;
+      }
+    }
+    return voted
+
   }
   showOptions(){
     let survey = {}
@@ -25,7 +38,7 @@ class Poll extends React.Component{
     if (this.props.poll.loggedIn){
       return(
         <div className="clearfix">
-          <button onClick={(e)=>this.vote(e)}>Vote!</button>
+          {this.hasVoted(survey) ? 'You have already voted in this survey' : <button onClick={(e)=>this.vote(e)}>Vote!</button>}
           { this.props.poll.user.username === survey.owner ?
               <button className='floatRight' onClick={(e)=>this.deleteSurvey(e)}>Delete this survey</button>
               :
@@ -101,6 +114,19 @@ class Poll extends React.Component{
         survey = this.props.poll.polls[i]
       }
     }
+    let chartData = {
+      labels: [],
+      datasets: [{data: [],
+                  backgroundColor: []
+                }]
+    }
+    for( var j=0; j<survey.choices.length; j++){
+      chartData.labels.push(survey.choices[j].value)
+      chartData.datasets[0].data.push(survey.choices[j].votes)
+      chartData.datasets[0].backgroundColor.push(colors[j])
+    }
+    console.log(chartData)
+
     return(
       <div className='survey'>
         <h1>{survey.description}</h1>
@@ -132,6 +158,7 @@ class Poll extends React.Component{
           </div>
          {this.showOptions()}
          </form>
+         <Doughnut data={chartData}/>
       </div>
     )
   }
