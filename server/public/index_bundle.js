@@ -14086,7 +14086,8 @@ var Poll = function (_React$Component) {
     key: 'handleFormChange',
     value: function handleFormChange(e) {
       if (e.target.type === 'text') {
-        this.setState({ newOption: e.target.value });
+        this.setState({ newOption: e.target.value,
+          selectedOption: +e.target.name });
       } else {
         this.setState({ selectedOption: +e.target.value });
       }
@@ -14149,60 +14150,72 @@ var Poll = function (_React$Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'survey' },
+        { className: 'survey clearfix' },
         _react2.default.createElement(
-          'h1',
-          null,
-          survey.description
-        ),
-        _react2.default.createElement(
-          'h3',
-          null,
-          'Survey Creator: ',
-          survey.owner
-        ),
-        _react2.default.createElement(
-          'form',
-          null,
-          survey.choices.map(function (choice, index) {
-            return _react2.default.createElement(
+          'div',
+          { className: 'container' },
+          _react2.default.createElement(
+            'h1',
+            null,
+            survey.description
+          ),
+          _react2.default.createElement(
+            'h3',
+            null,
+            'Survey Creator: ',
+            survey.owner
+          ),
+          _react2.default.createElement(
+            'form',
+            null,
+            survey.choices.map(function (choice, index) {
+              return _react2.default.createElement(
+                'div',
+                { className: 'choice clearfix', key: index },
+                _react2.default.createElement(
+                  'label',
+                  null,
+                  _react2.default.createElement('input', { type: 'radio', value: index, name: 'choice',
+                    disabled: !_this5.props.poll.loggedIn,
+                    onChange: function onChange(e) {
+                      return _this5.handleFormChange(e);
+                    },
+                    checked: _this5.state.selectedOption === index }),
+                  choice.value + " votes:" + choice.votes
+                )
+              );
+            }),
+            _react2.default.createElement(
               'div',
-              { className: 'choice clearfix', key: index },
+              { className: 'choice clearfix' },
               _react2.default.createElement(
                 'label',
                 null,
-                _react2.default.createElement('input', { type: 'radio', value: index, name: 'choice',
-                  disabled: !_this5.props.poll.loggedIn,
+                _react2.default.createElement('input', { type: 'radio', value: survey.choices.length, name: 'choice',
+                  disabled: !this.props.poll.loggedIn,
                   onChange: function onChange(e) {
                     return _this5.handleFormChange(e);
                   },
-                  checked: _this5.state.selectedOption === index }),
-                choice.value + " votes:" + choice.votes
+                  checked: this.state.selectedOption === survey.choices.length }),
+                _react2.default.createElement('input', { className: 'txtInput', type: 'text', value: this.state.newOption, placeholder: 'Add a new value',
+                  name: survey.choices.length, disabled: !this.props.poll.loggedIn,
+                  onChange: function onChange(e) {
+                    return _this5.handleFormChange(e);
+                  } })
               )
-            );
-          }),
+            ),
+            this.showOptions()
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'container' },
           _react2.default.createElement(
             'div',
-            { className: 'choice clearfix' },
-            _react2.default.createElement(
-              'label',
-              null,
-              _react2.default.createElement('input', { type: 'radio', value: survey.choices.length, name: 'choice',
-                disabled: !this.props.poll.loggedIn,
-                onChange: function onChange(e) {
-                  return _this5.handleFormChange(e);
-                },
-                checked: this.state.selectedOption === survey.choices.length }),
-              _react2.default.createElement('input', { className: 'txtInput', type: 'text', value: this.state.newOption, placeholder: 'Add a new value',
-                name: 'choice', disabled: !this.props.poll.loggedIn,
-                onChange: function onChange(e) {
-                  return _this5.handleFormChange(e);
-                } })
-            )
-          ),
-          this.showOptions()
-        ),
-        _react2.default.createElement(_reactChartjs.Doughnut, { data: chartData })
+            { className: 'chart' },
+            _react2.default.createElement(_reactChartjs.Doughnut, { data: chartData })
+          )
+        )
       );
     }
   }]);
@@ -46983,7 +46996,7 @@ exports = module.exports = __webpack_require__(335)(true);
 
 
 // module
-exports.push([module.i, "h1 {\n  text-align: center; }\n\n.app {\n  height: 100%; }\n\n.site {\n  display: flex;\n  min-height: 100vh;\n  flex-direction: column; }\n\n.site-content {\n  flex: 1 0 auto; }\n\n.clearfix:before,\n.clearfix:after {\n  content: \" \";\n  display: table; }\n\n.clearfix:after {\n  clear: both; }\n\n.clearfix {\n  *zoom: 1; }\n\n.login {\n  height: 100%;\n  margin: 150px 0 150px 0;\n  display: flex;\n  align-items: center;\n  justify-content: center; }\n\n.stickyFooter {\n  width: 100%;\n  color: #ffffff;\n  background-color: #26a5cc;\n  text-align: center; }\n\n.voteNav {\n  color: #ffffff;\n  background-color: #26a5cc;\n  text-align: center; }\n  .voteNav a, .voteNav a:visited {\n    color: white; }\n  .voteNav ul {\n    display: flex;\n    justify-content: space-between; }\n  .voteNav li {\n    display: inline-block; }\n\n.pointer {\n  cursor: pointer; }\n\n.floatRight {\n  float: right; }\n\n.survey .inline {\n  display: inline;\n  width: 75%; }\n\n.survey .choice input {\n  width: 10%;\n  float: left; }\n\n.survey .choice .txtInput {\n  width: 50%; }\n\n.stickyFooter {\n  margin-top: 25px; }\n", "", {"version":3,"sources":["/Users/dgenest/webdev/voting/client/styles/main.scss"],"names":[],"mappings":"AAAA;EACE,mBAAkB,EACnB;;AACD;EACE,aAAY,EACb;;AACD;EACE,cAAa;EACb,kBAAiB;EACjB,uBAAsB,EACvB;;AACD;EACE,eAAc,EACf;;AACD;;EAEE,aAAY;EACZ,eAAc,EACf;;AACD;EACE,YAAW,EACZ;;AACD;GACE,QAAQ,EACT;;AACD;EACE,aAAY;EACZ,wBAAuB;EACvB,cAAa;EACb,oBAAmB;EACnB,wBAAuB,EACxB;;AACD;EACE,YAAW;EACX,eAAc;EACd,0BAAyB;EACzB,mBAAkB,EACnB;;AACD;EACE,eAAc;EACd,0BAAyB;EACzB,mBAAkB,EAWnB;EAdD;IAKI,aAAW,EACZ;EANH;IAQI,cAAa;IACb,+BAA8B,EAC/B;EAVH;IAYI,sBAAqB,EACtB;;AAEH;EACE,gBAAe,EAChB;;AACD;EACE,aAAY,EACb;;AACD;EAEI,gBAAe;EACf,WAAU,EACX;;AAJH;EAOM,WAAU;EACV,YAAU,EACX;;AATL;EAWM,WAAU,EACX;;AAIL;EACE,iBAAgB,EACjB","file":"main.scss","sourcesContent":["h1{\n  text-align: center;\n}\n.app{\n  height: 100%;\n}\n.site {\n  display: flex;\n  min-height: 100vh;\n  flex-direction: column;\n}\n.site-content{\n  flex: 1 0 auto;\n}\n.clearfix:before,\n.clearfix:after {\n  content: \" \";\n  display: table;\n}\n.clearfix:after {\n  clear: both;\n}\n.clearfix {\n  *zoom: 1;\n}\n.login{\n  height: 100%;\n  margin: 150px 0 150px 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.stickyFooter{\n  width: 100%;\n  color: #ffffff;\n  background-color: #26a5cc;\n  text-align: center;\n}\n.voteNav{\n  color: #ffffff;\n  background-color: #26a5cc;\n  text-align: center;\n  a, a:visited{\n    color:white;\n  }\n  ul{\n    display: flex;\n    justify-content: space-between;\n  }\n  li{\n    display: inline-block;\n  }\n}\n.pointer{\n  cursor: pointer;\n}\n.floatRight{\n  float: right;\n}\n.survey{\n  .inline{\n    display: inline;\n    width: 75%;\n  }\n  .choice{\n    input{\n      width: 10%;\n      float:left;\n    }\n    .txtInput{\n      width: 50%;\n    }\n\n  }\n}\n.stickyFooter{\n  margin-top: 25px;\n}\n"],"sourceRoot":""}]);
+exports.push([module.i, "h1 {\n  text-align: center; }\n\n.app {\n  height: 100%; }\n\n.site {\n  display: flex;\n  min-height: 100vh;\n  flex-direction: column; }\n\n.site-content {\n  flex: 1 0 auto; }\n\n.clearfix:before,\n.clearfix:after {\n  content: \" \";\n  display: table; }\n\n.clearfix:after {\n  clear: both; }\n\n.clearfix {\n  *zoom: 1; }\n\n.login {\n  height: 100%;\n  margin: 150px 0 150px 0;\n  display: flex;\n  align-items: center;\n  justify-content: center; }\n\n.stickyFooter {\n  width: 100%;\n  color: #ffffff;\n  background-color: #26a5cc;\n  text-align: center; }\n\n.voteNav {\n  color: #ffffff;\n  background-color: #26a5cc;\n  text-align: center; }\n  .voteNav a, .voteNav a:visited {\n    color: white; }\n  .voteNav ul {\n    display: flex;\n    justify-content: space-between; }\n  .voteNav li {\n    display: inline-block; }\n\n.pointer {\n  cursor: pointer; }\n\n.floatRight {\n  float: right; }\n\n.survey .container {\n  height: 100%;\n  float: left;\n  width: 50%; }\n  .survey .container .chart {\n    height: 100%;\n    transform: translate(0, 33%); }\n\n.survey .inline {\n  display: inline;\n  width: 75%; }\n\n.survey .choice input {\n  width: 10%;\n  float: left; }\n\n.survey .choice .txtInput {\n  width: 50%; }\n\n.stickyFooter {\n  margin-top: 25px; }\n\n@media only screen and (max-width: 700px) {\n  .survey .container {\n    width: 100%; }\n    .survey .container .chart {\n      transform: translate(0, 0); } }\n", "", {"version":3,"sources":["/Users/dgenest/webdev/voting/client/styles/main.scss"],"names":[],"mappings":"AAAA;EACE,mBAAkB,EACnB;;AACD;EACE,aAAY,EACb;;AACD;EACE,cAAa;EACb,kBAAiB;EACjB,uBAAsB,EACvB;;AACD;EACE,eAAc,EACf;;AACD;;EAEE,aAAY;EACZ,eAAc,EACf;;AACD;EACE,YAAW,EACZ;;AACD;GACE,QAAQ,EACT;;AACD;EACE,aAAY;EACZ,wBAAuB;EACvB,cAAa;EACb,oBAAmB;EACnB,wBAAuB,EACxB;;AACD;EACE,YAAW;EACX,eAAc;EACd,0BAAyB;EACzB,mBAAkB,EACnB;;AACD;EACE,eAAc;EACd,0BAAyB;EACzB,mBAAkB,EAWnB;EAdD;IAKI,aAAW,EACZ;EANH;IAQI,cAAa;IACb,+BAA8B,EAC/B;EAVH;IAYI,sBAAqB,EACtB;;AAEH;EACE,gBAAe,EAChB;;AACD;EACE,aAAY,EACb;;AACD;EAEI,aAAY;EACZ,YAAW;EACX,WAAU,EAKX;EATH;IAMM,aAAY;IACZ,6BAA2B,EAC5B;;AARL;EAWI,gBAAe;EACf,WAAU,EACX;;AAbH;EAgBM,WAAU;EACV,YAAU,EACX;;AAlBL;EAoBM,WAAU,EACX;;AAIL;EACE,iBAAgB,EACjB;;AACD;EACE;IAEI,YAAW,EAIZ;IANH;MAIM,2BAAyB,EAC1B,EAAA","file":"main.scss","sourcesContent":["h1{\n  text-align: center;\n}\n.app{\n  height: 100%;\n}\n.site {\n  display: flex;\n  min-height: 100vh;\n  flex-direction: column;\n}\n.site-content{\n  flex: 1 0 auto;\n}\n.clearfix:before,\n.clearfix:after {\n  content: \" \";\n  display: table;\n}\n.clearfix:after {\n  clear: both;\n}\n.clearfix {\n  *zoom: 1;\n}\n.login{\n  height: 100%;\n  margin: 150px 0 150px 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.stickyFooter{\n  width: 100%;\n  color: #ffffff;\n  background-color: #26a5cc;\n  text-align: center;\n}\n.voteNav{\n  color: #ffffff;\n  background-color: #26a5cc;\n  text-align: center;\n  a, a:visited{\n    color:white;\n  }\n  ul{\n    display: flex;\n    justify-content: space-between;\n  }\n  li{\n    display: inline-block;\n  }\n}\n.pointer{\n  cursor: pointer;\n}\n.floatRight{\n  float: right;\n}\n.survey{\n  .container{\n    height: 100%;\n    float: left;\n    width: 50%;\n    .chart{\n      height: 100%;\n      transform: translate(0,33%);\n    }\n  }\n  .inline{\n    display: inline;\n    width: 75%;\n  }\n  .choice{\n    input{\n      width: 10%;\n      float:left;\n    }\n    .txtInput{\n      width: 50%;\n    }\n\n  }\n}\n.stickyFooter{\n  margin-top: 25px;\n}\n@media only screen and (max-width: 700px){\n  .survey{\n    .container{\n      width: 100%;\n      .chart{\n        transform: translate(0,0);\n      }\n    }\n  }\n}\n"],"sourceRoot":""}]);
 
 // exports
 

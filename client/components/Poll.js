@@ -72,7 +72,8 @@ class Poll extends React.Component{
 
   handleFormChange(e){
     if(e.target.type === 'text'){
-      this.setState({newOption: e.target.value})
+      this.setState({newOption: e.target.value,
+                     selectedOption: +e.target.name})
     } else {
       this.setState({selectedOption: +e.target.value})
     }
@@ -128,37 +129,43 @@ class Poll extends React.Component{
     console.log(chartData)
 
     return(
-      <div className='survey'>
-        <h1>{survey.description}</h1>
-        <h3>Survey Creator: {survey.owner}</h3>
-          <form>
-          {survey.choices.map( (choice, index) => {
-            return (
-              <div className='choice clearfix' key={index }>
-                <label>
-                  <input type="radio" value={index} name="choice"
-                         disabled={!this.props.poll.loggedIn}
-                         onChange={(e)=>this.handleFormChange(e)}
-                         checked={this.state.selectedOption === index}/>
-                  {choice.value + " votes:" + choice.votes}
-                </label>
-              </div>
-            )
-          })}
-          <div className='choice clearfix'>
-            <label>
-              <input type="radio" value={survey.choices.length} name="choice"
-                     disabled={!this.props.poll.loggedIn}
-                     onChange={(e)=>this.handleFormChange(e)}
-                     checked={this.state.selectedOption === survey.choices.length}/>
-              <input className="txtInput" type="text" value={this.state.newOption} placeholder="Add a new value"
-                     name="choice" disabled={!this.props.poll.loggedIn}
-                     onChange={(e)=>this.handleFormChange(e)}/>
-            </label>
-          </div>
-         {this.showOptions()}
-         </form>
-         <Doughnut data={chartData}/>
+      <div className='survey clearfix'>
+        <div className='container'>
+          <h1>{survey.description}</h1>
+          <h3>Survey Creator: {survey.owner}</h3>
+            <form>
+            {survey.choices.map( (choice, index) => {
+              return (
+                <div className='choice clearfix' key={index }>
+                  <label>
+                    <input type="radio" value={index} name="choice"
+                           disabled={!this.props.poll.loggedIn}
+                           onChange={(e)=>this.handleFormChange(e)}
+                           checked={this.state.selectedOption === index}/>
+                    {choice.value + " votes:" + choice.votes}
+                  </label>
+                </div>
+              )
+            })}
+            <div className='choice clearfix'>
+              <label>
+                <input type="radio" value={survey.choices.length} name="choice"
+                       disabled={!this.props.poll.loggedIn}
+                       onChange={(e)=>this.handleFormChange(e)}
+                       checked={this.state.selectedOption === survey.choices.length}/>
+                <input className="txtInput" type="text" value={this.state.newOption} placeholder="Add a new value"
+                       name={survey.choices.length} disabled={!this.props.poll.loggedIn}
+                       onChange={(e)=>this.handleFormChange(e)}/>
+              </label>
+            </div>
+           {this.showOptions()}
+           </form>
+         </div>
+         <div className="container">
+           <div className='chart'>
+             <Doughnut data={chartData}/>
+           </div>
+         </div>
       </div>
     )
   }
